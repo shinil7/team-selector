@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Team Selector</string>
+
+    <string name="atletico">Atletico Madrid</string>
+    <string name="barcelona">Barcelona</string>
+    <string name="chelsea">Chelsea</string>
+    <string name="juventus">Juventus</string>
+    <string name="city">Manchester City</string>
+    <string name="liverpool">Liverpool</string>
+    <string name="spurs">Tottenham</string>
+    <string name="bayern">Bayern Munich</string>
+    <string name="dortmund">Borussia Dortmund</string>
+    <string name="psg">PSG</string>
+    <string name="real">Real Madrid</string>
+    <string name="united">Manchester United</string>
+    <string name="arsenal">Arsenal</string>
+
+    <string name="chopra">Chopra</string>
+    <string name="midhunji">Midhun Ji</string>
+    <string name="abhi">Abhi</string>
+    <string name="vivek">Vivek</string>
+    <string name="thamizh">Thamizhan</string>
+    <string name="bheegar">Bheegaran</string>
+    <string name="kumar">Kumar</string>
+    <string name="sonu">Sonu</string>
+    <string name="nikhil">Nikhil</string>
+    <string name="sreeraj">Sreeraj</string>
+    <string name="giri">Gireesh</string>
+    <string name="sanal">Sanal</string>
+    <string name="kumman">Kumman</string>
+</resources>
