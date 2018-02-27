@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,17 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnPlayerSelectedListener} interface
- * to handle interaction events.
- * Use the {@link PlayerFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author shinilms
  */
+
 public class PlayerFragment extends Fragment
         implements CompoundButton.OnCheckedChangeListener {
 
-    public static final String ARG_PARAM1 = "number";
+    public static final String NUMBER_PARAM = "number";
     private OnPlayerSelectedListener mListener;
     private CheckBox chopra, midhunji, abhi, vivek, thamizh, bheegar, kuumar, sonu, nikhil, sreeraj, giri, sanal, kumman;
     private Button button;
@@ -36,19 +33,13 @@ public class PlayerFragment extends Fragment
     private List<String> playerList = new ArrayList<>();
 
     public PlayerFragment() {
-        // Required empty public constructor
+        //required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment PlayerFragment.
-     */
     public static PlayerFragment newInstance(int number) {
         PlayerFragment playerFragment = new PlayerFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARG_PARAM1, number);
+        bundle.putInt(NUMBER_PARAM, number);
         playerFragment.setArguments(bundle);
         return playerFragment;
     }
@@ -56,15 +47,20 @@ public class PlayerFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            number = getArguments().getInt(ARG_PARAM1);
-        }
+        if (getArguments() != null)
+            number = getArguments().getInt(NUMBER_PARAM);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_refresh).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_player, container, false);
         chopra = view.findViewById(R.id.chopra);
         chopra.setOnCheckedChangeListener(this);
@@ -96,45 +92,32 @@ public class PlayerFragment extends Fragment
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(abhi.isChecked()) {
+                if(abhi.isChecked())
                     playerList.add(getString(R.string.abhi));
-                }
-                if(bheegar.isChecked()) {
+                if(bheegar.isChecked())
                     playerList.add(getString(R.string.bheegar));
-                }
-                if(chopra.isChecked()) {
+                if(chopra.isChecked())
                     playerList.add(getString(R.string.chopra));
-                }
-                if(giri.isChecked()) {
+                if(giri.isChecked())
                     playerList.add(getString(R.string.giri));
-                }
-                if(kuumar.isChecked()) {
+                if(kuumar.isChecked())
                     playerList.add(getString(R.string.kumar));
-                }
-                if(kumman.isChecked()) {
+                if(kumman.isChecked())
                     playerList.add(getString(R.string.kumman));
-                }
-                if(midhunji.isChecked()) {
+                if(midhunji.isChecked())
                     playerList.add(getString(R.string.midhunji));
-                }
-                if(nikhil.isChecked()) {
+                if(nikhil.isChecked())
                     playerList.add(getString(R.string.nikhil));
-                }
-                if(sanal.isChecked()) {
+                if(sanal.isChecked())
                     playerList.add(getString(R.string.sanal));
-                }
-                if(sreeraj.isChecked()) {
+                if(sreeraj.isChecked())
                     playerList.add(getString(R.string.sreeraj));
-                }
-                if(sonu.isChecked()) {
+                if(sonu.isChecked())
                     playerList.add(getString(R.string.sonu));
-                }
-                if(thamizh.isChecked()) {
+                if(thamizh.isChecked())
                     playerList.add(getString(R.string.thamizh));
-                }
-                if(vivek.isChecked()) {
+                if(vivek.isChecked())
                     playerList.add(getString(R.string.vivek));
-                }
 
                 if(mListener != null)
                     mListener.onSubmitClicked(playerList);
@@ -143,7 +126,6 @@ public class PlayerFragment extends Fragment
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed() {
         if(counter == number) {
             button.setEnabled(true);
@@ -159,9 +141,9 @@ public class PlayerFragment extends Fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnPlayerSelectedListener) {
+        if (context instanceof OnPlayerSelectedListener)
             mListener = (OnPlayerSelectedListener) context;
-        } else {
+        else {
             throw new RuntimeException(context.toString()
                     + " must implement OnPlayerSelectedListener");
         }
@@ -228,16 +210,6 @@ public class PlayerFragment extends Fragment
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnPlayerSelectedListener {
         void onPlayerSelected(int count, int player_no);
         void onSubmitClicked(List<String> playerList);

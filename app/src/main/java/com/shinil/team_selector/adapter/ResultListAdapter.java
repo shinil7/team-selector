@@ -17,7 +17,7 @@ import com.shinil.team_selector.R;
 import java.util.List;
 
 /**
- * Created by Shinil on 11-11-2017
+ * @author shinilms
  */
 
 public class ResultListAdapter extends ArrayAdapter<String> {
@@ -51,35 +51,36 @@ public class ResultListAdapter extends ArrayAdapter<String> {
         String[] split = item.split(":");
         String name = split[0];
         String team = split[1];
-        if(team.startsWith(getContext().getString(R.string.atletico))) {
+
+        if(team.startsWith(getContext().getString(R.string.atletico)))
             Glide.with(getContext()).load(R.drawable.atletico).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.barcelona))) {
+        else if(team.startsWith(getContext().getString(R.string.barcelona)))
             Glide.with(getContext()).load(R.drawable.barca).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.chelsea))) {
+        else if(team.startsWith(getContext().getString(R.string.chelsea)))
             Glide.with(getContext()).load(R.drawable.cheslsea).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.juventus))) {
+        else if(team.startsWith(getContext().getString(R.string.juventus)))
             Glide.with(getContext()).load(R.drawable.juventus).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.city))) {
+        else if(team.startsWith(getContext().getString(R.string.city)))
             Glide.with(getContext()).load(R.drawable.city).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.liverpool))) {
+        else if(team.startsWith(getContext().getString(R.string.liverpool)))
             Glide.with(getContext()).load(R.drawable.liverpool).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.spurs))) {
+        else if(team.startsWith(getContext().getString(R.string.spurs)))
             Glide.with(getContext()).load(R.drawable.spurs).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.bayern))) {
+        else if(team.startsWith(getContext().getString(R.string.bayern)))
             Glide.with(getContext()).load(R.drawable.bayern).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.dortmund))) {
+        else if(team.startsWith(getContext().getString(R.string.dortmund)))
             Glide.with(getContext()).load(R.drawable.bvb).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.psg))) {
+        else if(team.startsWith(getContext().getString(R.string.psg)))
             Glide.with(getContext()).load(R.drawable.psg).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.real))) {
+        else if(team.startsWith(getContext().getString(R.string.real)))
             Glide.with(getContext()).load(R.drawable.real).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.united))) {
+        else if(team.startsWith(getContext().getString(R.string.united)))
             Glide.with(getContext()).load(R.drawable.united).into(holder.image);
-        } else if(team.startsWith(getContext().getString(R.string.arsenal))) {
+        else if(team.startsWith(getContext().getString(R.string.arsenal)))
             Glide.with(getContext()).load(R.drawable.arsenal).into(holder.image);
-        } else {
+        else
             Glide.with(getContext()).load(R.mipmap.ic_launcher).into(holder.image);
-        }
+
         holder.text.setText(name);
         return rowView;
     }

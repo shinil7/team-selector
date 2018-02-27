@@ -3,8 +3,10 @@ package com.shinil.team_selector.fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,13 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnTeamSelectedListener} interface
- * to handle interaction events.
- * Use the {@link TeamFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @author shinilms
  */
+
 public class TeamFragment extends Fragment
         implements CompoundButton.OnCheckedChangeListener {
     private OnTeamSelectedListener mListener;
@@ -33,23 +31,28 @@ public class TeamFragment extends Fragment
     private List<String> teamList = new ArrayList<>();
 
     public TeamFragment() {
-        // Required empty public constructor
+        //required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment TeamFragment.
-     */
     public static TeamFragment newInstance() {
         return new TeamFragment();
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_refresh).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_team, container, false);
         atletico = view.findViewById(R.id.atletico);
         atletico.setOnCheckedChangeListener(this);
@@ -81,45 +84,32 @@ public class TeamFragment extends Fragment
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(arsenal.isChecked()) {
+                if(arsenal.isChecked())
                     teamList.add(getString(R.string.arsenal));
-                }
-                if(atletico.isChecked()) {
+                if(atletico.isChecked())
                     teamList.add(getString(R.string.atletico));
-                }
-                if(barcelona.isChecked()) {
+                if(barcelona.isChecked())
                     teamList.add(getString(R.string.barcelona));
-                }
-                if(bayern.isChecked()) {
+                if(bayern.isChecked())
                     teamList.add(getString(R.string.bayern));
-                }
-                if(dortmund.isChecked()) {
+                if(dortmund.isChecked())
                     teamList.add(getString(R.string.dortmund));
-                }
-                if(chelsea.isChecked()) {
+                if(chelsea.isChecked())
                     teamList.add(getString(R.string.chelsea));
-                }
-                if(juventus.isChecked()) {
+                if(juventus.isChecked())
                     teamList.add(getString(R.string.juventus));
-                }
-                if(liverpool.isChecked()) {
+                if(liverpool.isChecked())
                     teamList.add(getString(R.string.liverpool));
-                }
-                if(city.isChecked()) {
+                if(city.isChecked())
                     teamList.add(getString(R.string.city));
-                }
-                if(united.isChecked()) {
+                if(united.isChecked())
                     teamList.add(getString(R.string.united));
-                }
-                if(psg.isChecked()) {
+                if(psg.isChecked())
                     teamList.add(getString(R.string.psg));
-                }
-                if(real.isChecked()) {
+                if(real.isChecked())
                     teamList.add(getString(R.string.real));
-                }
-                if(spurs.isChecked()) {
+                if(spurs.isChecked())
                     teamList.add(getString(R.string.spurs));
-                }
 
                 if(mListener != null)
                     mListener.onNextClicked(counter, teamList);
@@ -128,7 +118,6 @@ public class TeamFragment extends Fragment
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed() {
         if(counter > 1) {
             button.setEnabled(true);
@@ -144,9 +133,9 @@ public class TeamFragment extends Fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnTeamSelectedListener) {
+        if (context instanceof OnTeamSelectedListener)
             mListener = (OnTeamSelectedListener) context;
-        } else {
+        else {
             throw new RuntimeException(context.toString()
                     + " must implement OnTeamSelectedListener");
         }
@@ -213,16 +202,6 @@ public class TeamFragment extends Fragment
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnTeamSelectedListener {
         void onTeamSelected(int number);
         void onNextClicked(int count, List<String> teamList);

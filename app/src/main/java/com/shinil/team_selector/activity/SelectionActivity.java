@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +21,10 @@ import com.shinil.team_selector.fragment.TeamFragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+/**
+ * @author shinilms
+ */
 
 public class SelectionActivity extends AppCompatActivity
         implements TeamFragment.OnTeamSelectedListener,
@@ -35,6 +41,21 @@ public class SelectionActivity extends AppCompatActivity
         textView = (TextView) findViewById(R.id.text_view);
         initToolbar();
         addFragment();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_selection_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_refresh) {
+            replaceFragment(TeamFragment.newInstance());
+            recreate();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initToolbar() {
@@ -74,9 +95,8 @@ public class SelectionActivity extends AppCompatActivity
     @Override
     public void onSubmitClicked(List<String> playerList) {
         textView.setVisibility(View.GONE);
-        for(String player : playerList) {
-            result.add(player + ":" + getRandom(teamList) + " ");
-        }
+        for(String player : playerList)
+            result.add(player + ":" + getRandom(teamList) + "");
         replaceFragment(ResultFragment.newInstance(result));
     }
 
@@ -90,13 +110,13 @@ public class SelectionActivity extends AppCompatActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exitByBackKey();
+            backKeyPressed();
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    private void exitByBackKey() {
+    private void backKeyPressed() {
         new AlertDialog.Builder(this)
                 .setMessage("Do you want to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
