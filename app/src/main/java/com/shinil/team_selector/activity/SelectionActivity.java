@@ -3,6 +3,7 @@ package com.shinil.team_selector.activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class SelectionActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-        textView = (TextView) findViewById(R.id.text_view);
+        textView = findViewById(R.id.text_view);
         initToolbar();
         addFragment();
     }
@@ -53,7 +54,15 @@ public class SelectionActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_refresh) {
             replaceFragment(TeamFragment.newInstance());
-            recreate();
+            teamList.clear();
+            result.clear();
+            textView.setText("0");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    textView.setVisibility(View.VISIBLE);
+                }
+            }, 200);
         }
         return super.onOptionsItemSelected(item);
     }
